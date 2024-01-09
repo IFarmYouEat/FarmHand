@@ -2,12 +2,14 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
 
-  if(req.isAuthenticated()){
   const query = `SELECT * FROM "crops" WHERE "user_id" = $1;`;
   pool.query(query, [req.user.id])
   .then(result => {
@@ -17,17 +19,13 @@ router.get('/', (req, res) => {
     console.log('Error in Crop Router', error);
     res.sendStatus(500);
   })
-} else {
-  res.sendStatus(401);
-};
 });
 
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
 
-  if(req.isAuthenticated()){
   const newYield = req.body;
   const queryText = `INSERT INTO "crops"("user_id", "year", "crop", "yield")
                     VALUES ($1, $2, $3, $4);`;
@@ -43,12 +41,13 @@ router.post('/', (req, res) => {
     console.log('Error in Crop Router Post Route.', error);
     res.sendStatus(500);
   });
-} else {
-  res.sendStatus(401);
-}
 });
 
-router.put('/', (req, res) => {
+router.put('/', rejectUnauthenticated, (req, res) => {
+
+})
+
+router.delete('/:id', rejectUnauthenticated, (req,res) => {
 
 })
 
