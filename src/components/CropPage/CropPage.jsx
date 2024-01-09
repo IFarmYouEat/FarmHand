@@ -30,8 +30,7 @@ function CropPage() {
 
     return (
         <div>
-            <div>
-                <form onSubmit={addNewYield}>
+                <form onSubmit={addNewYield} className="container">
                     Year:
                     <input
                         type="number"
@@ -40,7 +39,7 @@ function CropPage() {
                     />
                     <fieldset onChange={(event) => handleChangeFor('crop', event.target.value)}>
                         <legend>Select Crop</legend>
-                        <div>
+                        
                             <label>Corn</label>
                             <input
                                 type="radio"
@@ -48,8 +47,6 @@ function CropPage() {
                                 id="Corn"
                                 name="crop"
                             />
-                        </div>
-                        <div>
                             <label>Soybeans</label>
                             <input
                                 type="radio"
@@ -57,7 +54,6 @@ function CropPage() {
                                 id="Soybeans"
                                 name="crop"
                             />
-                        </div>
                     </fieldset>
                     Yield:
                     <input
@@ -67,22 +63,20 @@ function CropPage() {
                     />
                     <input type='submit' value='Add New Yield' />
                 </form>
-
-            </div>
             <div className="container" >
                 <table>
                     <thead>
-                        <td>ID</td>
+                        <tr>
                         <td>User</td>
                         <td>Year</td>
                         <td>Crop</td>
                         <td>Total Yield</td>
+                        </tr>
                     </thead>
                     <tbody>
                         {yields.map(entry => {
                             return (
-                                <tr>
-                                    <td>{entry.id}</td>
+                                <tr key={entry.id}>
                                     <td>{entry.user_id}</td>
                                     <td>{entry.year}</td>
                                     <td>{entry.crop}</td>
