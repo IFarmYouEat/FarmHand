@@ -24,6 +24,10 @@ function CropPage() {
         setYield({ user_id: user.id, year: currentYear, crop: '', yield: 0 });
     };
 
+    const removeYield = (id) => {
+        dispatch ({ type: 'REMOVE_YIELD', payload: id});
+    };
+
     useEffect(() => {
         dispatch({ type: 'FETCH_YIELDS' });
     }, []);
@@ -67,7 +71,6 @@ function CropPage() {
                 <table>
                     <thead>
                         <tr>
-                        <td>User</td>
                         <td>Year</td>
                         <td>Crop</td>
                         <td>Total Yield</td>
@@ -77,10 +80,10 @@ function CropPage() {
                         {yields.map(entry => {
                             return (
                                 <tr key={entry.id}>
-                                    <td>{entry.user_id}</td>
                                     <td>{entry.year}</td>
                                     <td>{entry.crop}</td>
                                     <td>{entry.yield}</td>
+                                    <td>{<button onClick={()=> removeYield(entry.id)}>Delete</button>}</td>
                                 </tr>
                             )
                         })}
