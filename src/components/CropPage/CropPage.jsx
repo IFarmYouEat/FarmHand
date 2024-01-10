@@ -19,14 +19,13 @@ function CropPage() {
         <div>
             <CropForm />
             
-
             <div className="container" >
                 <table>
                     <thead>
                         <tr>
-                            <td>Year</td>
-                            <td>Crop</td>
-                            <td>Total Yield</td>
+                            <th>Year</th>
+                            <th>Crop</th>
+                            <th>Total Yield</th>
                         </tr>
                     </thead>
                     <tbody>
