@@ -24,7 +24,6 @@ function CropForm() {
 
     return (
         <div>
-            <p>Hello you absolute legend</p>
             <form onSubmit={addNewYield} className="container">
                 Year:
                 <input

@@ -57,7 +57,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
   })
 })
 
-// Add verification for user_id in queryText
+//TODO: Add verification for user_id in queryText WHERE id=$1 && "user_id" = req.user.id?
 
 router.delete('/:id', rejectUnauthenticated, (req,res) => {
   const queryText = `DELETE FROM "crops" WHERE id=$1;`;
