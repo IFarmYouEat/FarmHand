@@ -25,9 +25,8 @@ function CropTable() {
   };
 
   return (
-    <div>
-      <div className="container" >
-        <table>
+    <div className="table-wrapper">
+        <table className="table">
           <thead>
             <tr>
               <th>Year</th>
@@ -46,7 +45,7 @@ function CropTable() {
                   <td>{entry.yield}</td>
                   <td>{entry.status}</td>
                   <td>
-                    <span>
+                    <span className="actions">
                       {<button onClick={() => removeYield(entry.id)}>Delete</button>}
                       {<button onClick={() => updateYield(entry)}>Edit</button>}
                     </span>
@@ -57,7 +56,6 @@ function CropTable() {
           </tbody>
         </table>
       </div>
-    </div>
   );
 };
 
