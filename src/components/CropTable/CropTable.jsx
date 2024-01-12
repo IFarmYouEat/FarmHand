@@ -1,70 +1,65 @@
-import {
-  GridColDef,
-  GridRowsProp,
-  DataGrid,
-  GridCellEditStopParams,
-  GridCellEditStopReasons,
-  MuiEvent,
-} from '@mui/x-data-grid';
-
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import './CropTable.css'
 
-function CropTable () {
 
-    const dispatch = useDispatch();
-    const yields = useSelector(store => store.crop);   
+function CropTable() {
 
-    const rows: GridRowsProp = yields;
 
-    useEffect(() => {
-        dispatch({ type: 'FETCH_YIELDS' });
-    }, []);
 
-    const updateYield = (editedYield) => {
-        dispatch({ type: 'UPDATE_YIELD', payload: editedYield});
-        console.log("Updated yield fields:", Yield);
-    };
+
+  const dispatch = useDispatch();
+  const yields = useSelector(store => store.crop);
+
+  useEffect(() => {
+    dispatch({ type: 'FETCH_YIELDS' });
+  }, []);
+
+  const removeYield = (id) => {
+    dispatch({ type: 'REMOVE_YIELD', payload: id });
+  };
+
+  const updateYield = (editedYield) => {
+    dispatch({ type: 'UPDATE_YIELD', payload: editedYield });
+    console.log("Updated yield fields:", Yield);
+  };
 
   return (
-    <div style={{ height: 500, width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        editMode='row'
-        processRowUpdate={( updatedRow, originalRow) =>
-            updateYield(updatedRow)
-        }
-        onCellEditStop={(params: GridCellEditStopParams, event: MuiEvent) => {
-          if (params.reason === GridCellEditStopReasons.cellFocusOut) {
-            event.defaultMuiPrevented = true;
-          }
-        }}
-      />
+    <div>
+      <div className="container" >
+        <table>
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Crop</th>
+              <th>Total Yield</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {yields.map(entry => {
+              return (
+                <tr key={entry.id}>
+                  <td>{entry.year}</td>
+                  <td>{entry.crop}</td>
+                  <td>{entry.yield}</td>
+                  <td>{entry.status}</td>
+                  <td>
+                    <span>
+                      {<button onClick={() => removeYield(entry.id)}>Delete</button>}
+                      {<button onClick={() => updateYield(entry)}>Edit</button>}
+                    </span>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
-
-const columns: GridColDef[] = [
-  { field: 'crop', headerName: 'Crop', width: 250, editable: true },
-  {
-    field: 'year',
-    headerName: 'Year',
-    type: 'string',
-    editable: true,
-    align: 'center',
-    headerAlign: 'left',
-  },
-  {
-    field: 'yield',
-    headerName: 'Yield',
-    type: 'number',
-    width: 250,
-    editable: true,
-  },
-];
-
-
 
 
 export default CropTable;
