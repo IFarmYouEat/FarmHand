@@ -115,5 +115,5 @@ input {
 
 .App{
   background-color: #f2ffcf;
-  height: 100%
+  min-height: 100vh;
 }

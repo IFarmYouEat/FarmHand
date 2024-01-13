@@ -3,14 +3,14 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import "./Modal.css";
 
-function Modal({ closeModal }) {
+function Modal({ closeModal, defaultValue }) {
 
     let currentDate = new Date();
     let currentYear = currentDate.getFullYear();
 
     const dispatch = useDispatch();
 
-    let [yearlyYield, setYearlyYield] = useState({ year: currentYear, crop: '', yield: 0, source:'' });
+    let [yearlyYield, setYearlyYield] = useState(defaultValue || { year: currentYear, crop: '', yield: 0, source: '' });
 
     const handleChangeFor = (key, value) => {
         setYearlyYield({ ...yearlyYield, [key]: value })
@@ -18,15 +18,22 @@ function Modal({ closeModal }) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch({ type: 'SEND_YIELD_TO_SERVER', payload: yearlyYield });
-        console.log("Sent New Yield to Server:", yearlyYield);
-        setYearlyYield({ year: currentYear, crop: '', yield: 0, source:''});
+        if (defaultValue === null) {
+            dispatch({ type: 'SEND_YIELD_TO_SERVER', payload: yearlyYield });
+            console.log("Sent New Yield to Server:", yearlyYield);
+        } else {
+            dispatch({ type: 'UPDATE_YIELD', payload: yearlyYield });
+            console.log("Updated yield fields:", yearlyYield);
+        }
+        setYearlyYield({ year: currentYear, crop: '', yield: 0, source: '' });
         closeModal();
+
     };
 
     return (
         <div className="modal-container" onClick={(e) => {
-            if (e.target.className === "modal-container")closeModal()}}>
+            if (e.target.className === "modal-container") closeModal()
+        }}>
             <div className="modal">
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
@@ -47,12 +54,12 @@ function Modal({ closeModal }) {
                         </select>
                     </div>
                     <div className="form-group">
-                    <label htmlFor="yield">Yield:</label>
-                    <input
-                        type="number"
-                        value={yearlyYield.yield}
-                        onChange={(event) => handleChangeFor('yield', event.target.value)}
-                    />
+                        <label htmlFor="yield">Yield:</label>
+                        <input
+                            type="number"
+                            value={yearlyYield.yield}
+                            onChange={(event) => handleChangeFor('yield', event.target.value)}
+                        />
                     </div>
                     <div className="form-group">
                         <label htmlFor="source">Source:</label>
@@ -64,7 +71,7 @@ function Modal({ closeModal }) {
                         </select>
                     </div>
                     <button type='submit' className="btn">Submit</button>
-                    
+
                 </form>
             </div>
 

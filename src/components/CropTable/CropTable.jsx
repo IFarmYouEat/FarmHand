@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './CropTable.css'
 
 
-function CropTable() {
+function CropTable({editRow}) {
 
   const dispatch = useDispatch();
   const yields = useSelector(store => store.crop);
@@ -14,11 +14,6 @@ function CropTable() {
 
   const removeYield = (id) => {
     dispatch({ type: 'REMOVE_YIELD', payload: id });
-  };
-
-  const updateYield = (editedYield) => {
-    dispatch({ type: 'UPDATE_YIELD', payload: editedYield });
-    console.log("Updated yield fields:", Yield);
   };
 
   return (
@@ -43,8 +38,8 @@ function CropTable() {
                   <td>{entry.source}</td>
                   <td>
                     <span className="actions">
-                      {<button onClick={() => updateYield(entry)}>Edit</button>}
-                      {<button onClick={() => removeYield(entry.id)}>Delete</button>}
+                      {<button className="btn" onClick={() => editRow(entry)}>Edit</button>}
+                      {<button className="btn" onClick={() => removeYield(entry.id)}>Delete</button>}
                     </span>
                   </td>
                 </tr>
