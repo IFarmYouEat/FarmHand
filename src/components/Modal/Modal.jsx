@@ -1,21 +1,27 @@
 import React from "react";
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import "./Modal.css";
 
 function Modal({ closeModal, defaultValue }) {
 
+    const dispatch = useDispatch();
+
+    // Pulls the current year for the form to use as a default value
     let currentDate = new Date();
     let currentYear = currentDate.getFullYear();
 
-    const dispatch = useDispatch();
-
+    // If no value passed in through prop defaultValue
+    // useState will set initial values
     let [yearlyYield, setYearlyYield] = useState(defaultValue || { year: currentYear, crop: '', yield: 0, source: '' });
 
+    // Change handler for values in form
     const handleChangeFor = (key, value) => {
         setYearlyYield({ ...yearlyYield, [key]: value })
     };
 
+    // Submit handler will submit a new value if defaultValue is null
+    // or update current values if a value is passed in.
     const handleSubmit = (event) => {
         event.preventDefault();
         if (defaultValue === null) {
@@ -27,7 +33,6 @@ function Modal({ closeModal, defaultValue }) {
         }
         setYearlyYield({ year: currentYear, crop: '', yield: 0, source: '' });
         closeModal();
-
     };
 
     return (
@@ -76,7 +81,6 @@ function Modal({ closeModal, defaultValue }) {
             </div>
 
         </div>
-
     )
 }
 
