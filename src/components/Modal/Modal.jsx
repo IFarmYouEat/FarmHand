@@ -10,17 +10,17 @@ function Modal({ closeModal }) {
 
     const dispatch = useDispatch();
 
-    let [newYield, setYield] = useState({ year: currentYear, crop: '', yield: 0, source:'' });
+    let [yearlyYield, setYearlyYield] = useState({ year: currentYear, crop: '', yield: 0, source:'' });
 
     const handleChangeFor = (key, value) => {
-        setYield({ ...newYield, [key]: value })
+        setYearlyYield({ ...yearlyYield, [key]: value })
     };
 
-    const addNewYield = event => {
+    const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch({ type: 'SEND_YIELD_TO_SERVER', payload: newYield });
-        console.log("Sent New Yield to Server:", newYield);
-        setYield({ year: currentYear, crop: '', yield: 0 });
+        dispatch({ type: 'SEND_YIELD_TO_SERVER', payload: yearlyYield });
+        console.log("Sent New Yield to Server:", yearlyYield);
+        setYearlyYield({ year: currentYear, crop: '', yield: 0, source:''});
         closeModal();
     };
 
@@ -28,19 +28,19 @@ function Modal({ closeModal }) {
         <div className="modal-container" onClick={(e) => {
             if (e.target.className === "modal-container")closeModal()}}>
             <div className="modal">
-                <form onSubmit={addNewYield}>
+                <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="year">Year:</label>
                         <input
                             name="year"
                             type="number"
-                            value={newYield.year}
+                            value={yearlyYield.year}
                             onChange={(event) => handleChangeFor('year', event.target.value)}
                         />
                     </div>
                     <div className="form-group">
                         <label htmlFor="crop">Select Crop:</label>
-                        <select name="crop" onChange={(event) => handleChangeFor('crop', event.target.value)}>
+                        <select name="crop" onChange={(event) => handleChangeFor('crop', event.target.value)} value={yearlyYield.crop}>
                             <option value="">No Selection</option>
                             <option value="Corn">Corn</option>
                             <option value="Soybeans">Soybeans</option>
@@ -50,13 +50,13 @@ function Modal({ closeModal }) {
                     <label htmlFor="yield">Yield:</label>
                     <input
                         type="number"
-                        value={newYield.yield}
+                        value={yearlyYield.yield}
                         onChange={(event) => handleChangeFor('yield', event.target.value)}
                     />
                     </div>
                     <div className="form-group">
                         <label htmlFor="source">Source:</label>
-                        <select name="source" onChange={(event) => handleChangeFor('source', event.target.value)}>
+                        <select name="source" onChange={(event) => handleChangeFor('source', event.target.value)} value={yearlyYield.source}>
                             <option value="">No Selection</option>
                             <option value="Projected">Projected</option>
                             <option value="Monitor">Monitor</option>
