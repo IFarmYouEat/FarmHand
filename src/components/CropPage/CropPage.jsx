@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import './CropPage.css';
-import CropForm from '../CropForm/CropForm';
+import React from 'react';
+import {useState} from 'react';
 import CropTable from '../CropTable/CropTable';
 import Modal from '../Modal/Modal'
 
+import './CropPage.css';
+
 function CropPage() {
+    const [modalOpen, setModalOpen] = useState(false);
 
     return (
-        <div className="container">
+        <div className="CropPage">
             <h1>Yearly Crop Yield</h1>
-            <CropForm />
             <CropTable />
-            <Modal />
+            <button className="btn" onClick={() => setModalOpen(true)}>Add New Yield</button>
+            {modalOpen && <Modal closeModal={() => {setModalOpen(false)}}/>}
 
         </div>
     )

@@ -46,8 +46,8 @@ function CropTable() {
                   <td>{entry.status}</td>
                   <td>
                     <span className="actions">
-                      {<button onClick={() => removeYield(entry.id)}>Delete</button>}
                       {<button onClick={() => updateYield(entry)}>Edit</button>}
+                      {<button onClick={() => removeYield(entry.id)}>Delete</button>}
                     </span>
                   </td>
                 </tr>

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import "./Modal.css";
 
-function Modal() {
+function Modal({ closeModal }) {
 
     let currentDate = new Date();
     let currentYear = currentDate.getFullYear();
@@ -21,10 +21,12 @@ function Modal() {
         dispatch({ type: 'SEND_YIELD_TO_SERVER', payload: newYield });
         console.log("Sent New Yield to Server:", newYield);
         setYield({ year: currentYear, crop: '', yield: 0 });
+        closeModal();
     };
 
     return (
-        <div className="modal-container">
+        <div className="modal-container" onClick={(e) => {
+            if (e.target.className === "modal-container")closeModal()}}>
             <div className="modal">
                 <form onSubmit={addNewYield}>
                     <div className="form-group">
