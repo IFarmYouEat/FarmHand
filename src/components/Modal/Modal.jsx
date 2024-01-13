@@ -10,7 +10,7 @@ function Modal({ closeModal }) {
 
     const dispatch = useDispatch();
 
-    let [newYield, setYield] = useState({ year: currentYear, crop: '', yield: 0 });
+    let [newYield, setYield] = useState({ year: currentYear, crop: '', yield: 0, source:'' });
 
     const handleChangeFor = (key, value) => {
         setYield({ ...newYield, [key]: value })
@@ -41,8 +41,9 @@ function Modal({ closeModal }) {
                     <div className="form-group">
                         <label htmlFor="crop">Select Crop:</label>
                         <select name="crop" onChange={(event) => handleChangeFor('crop', event.target.value)}>
-                            <option value="corn">Corn</option>
-                            <option value="soybeans">Soybeans</option>
+                            <option value="">No Selection</option>
+                            <option value="Corn">Corn</option>
+                            <option value="Soybeans">Soybeans</option>
                         </select>
                     </div>
                     <div className="form-group">
@@ -54,11 +55,12 @@ function Modal({ closeModal }) {
                     />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="status">Status:</label>
-                        <select name="status" onChange={(event) => handleChangeFor('status', event.target.value)}>
-                            <option value="projected">Projected</option>
-                            <option value="monitor">Monitor</option>
-                            <option value="actual">Actual</option>
+                        <label htmlFor="source">Source:</label>
+                        <select name="source" onChange={(event) => handleChangeFor('source', event.target.value)}>
+                            <option value="">No Selection</option>
+                            <option value="Projected">Projected</option>
+                            <option value="Monitor">Monitor</option>
+                            <option value="Actual">Actual</option>
                         </select>
                     </div>
                     <button type='submit' className="btn">Submit</button>

@@ -5,9 +5,6 @@ import './CropTable.css'
 
 function CropTable() {
 
-
-
-
   const dispatch = useDispatch();
   const yields = useSelector(store => store.crop);
 
@@ -32,7 +29,7 @@ function CropTable() {
               <th>Year</th>
               <th>Crop</th>
               <th>Total Yield</th>
-              <th>Status</th>
+              <th>Source</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -43,7 +40,7 @@ function CropTable() {
                   <td>{entry.year}</td>
                   <td>{entry.crop}</td>
                   <td>{entry.yield}</td>
-                  <td>{entry.status}</td>
+                  <td>{entry.source}</td>
                   <td>
                     <span className="actions">
                       {<button onClick={() => updateYield(entry)}>Edit</button>}

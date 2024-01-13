@@ -22,13 +22,14 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.post('/', rejectUnauthenticated, (req, res) => {
 
   const newYield = req.body;
-  const queryText = `INSERT INTO "crops"("user_id", "year", "crop", "yield")
-                    VALUES ($1, $2, $3, $4);`;
+  const queryText = `INSERT INTO "crops"("user_id", "year", "crop", "yield", "source")
+                    VALUES ($1, $2, $3, $4, $5);`;
   const queryValues = [
     req.user.id,
     newYield.year,
     newYield.crop,
     newYield.yield,
+    newYield.source,
   ];
   pool.query(queryText, queryValues)
   .then(() => {res.sendStatus(201);})
@@ -40,12 +41,13 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 router.put('/', rejectUnauthenticated, (req, res) => {
   const updatedYield = req.body;
-  const queryText = `UPDATE "crops" SET "year" = $1, "crop" = $2, "yield" = $3 WHERE id=$4;`;
+  const queryText = `UPDATE "crops" SET "year" = $1, "crop" = $2, "yield" = $3, "source" = $4 WHERE id=$5;`;
 
   const queryValues = [
     updatedYield.year,
     updatedYield.crop,
     updatedYield.yield,
+    updatedYield.source,
     updatedYield.id,
   ];
 
