@@ -36,6 +36,10 @@ function Nav() {
               Yearly Crop Yield
             </Link>
 
+            <Link className="navLink" to="/contract">
+              Contracts
+            </Link>
+
             <LogOutButton className="navLink" />
           </>
         )}

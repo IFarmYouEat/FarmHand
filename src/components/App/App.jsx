@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import CropPage from '../CropPage/CropPage';
+import ContractPage from '../ContractPage/ContractPage';
 
 import './App.css';
 
@@ -76,6 +77,14 @@ function App() {
           >
             <CropPage />
           </ProtectedRoute>
+          
+          <ProtectedRoute
+            exact
+            path="/contract"
+          >
+            <ContractPage />
+          </ProtectedRoute>
+
           
 
           <Route
