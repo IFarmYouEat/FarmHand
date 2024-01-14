@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import CropTable from '../CropTable/CropTable';
-import Modal from '../Modal/Modal';
+import CropModal from '../CropModal/CropModal';
 
 import './CropPage.css';
 
@@ -20,7 +20,7 @@ function CropPage() {
             <h1>Yearly Crop Yield</h1>
             <button className="btn" onClick={() => setModalOpen(true)}>Add New Yield</button>
             {/* makes the modal closed by default, changing modalOpen to true will open modal */}
-            {modalOpen && <Modal closeModal={() => { setModalOpen(false), setRowToEdit(null) }} defaultValue={rowToEdit} />}
+            {modalOpen && <CropModal closeModal={() => { setModalOpen(false), setRowToEdit(null) }} defaultValue={rowToEdit} />}
 
             {/* passes handleEditRow in as a prop to retrieve values for Modal */}
             <CropTable editRow={handleEditRow} />

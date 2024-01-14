@@ -1,9 +1,9 @@
 import React from "react";
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import "./Modal.css";
+import "./CropModal.css";
 
-function Modal({ closeModal, defaultValue }) {
+function CropModal({ closeModal, defaultValue }) {
 
     const dispatch = useDispatch();
 
@@ -84,4 +84,4 @@ function Modal({ closeModal, defaultValue }) {
     )
 }
 
-export default Modal;
+export default CropModal;
