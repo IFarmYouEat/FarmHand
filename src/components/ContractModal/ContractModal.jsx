@@ -6,7 +6,7 @@ function ContractModal({ closeModal, defaultValue }) {
 
     const dispatch = useDispatch();
 
-    let [contract, setContract] = useState(defaultValue || {contract_id: "", location: "", amount: 0, price: 0, month: "", status: ""});
+    let [contract, setContract] = useState(defaultValue || {contract_id: "", location: "", amount: 0, price: 0, month: "", status: "" });
 
     const handleChangeFor = (key, value) => {
         setContract({ ...contract, [key]: value })
@@ -14,23 +14,25 @@ function ContractModal({ closeModal, defaultValue }) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (defaultValue === null) {
-            console.log(contract)
-            dispatch({ type: 'SEND_CONTRACT_TO_SERVER', payload: contract });
-            console.log("Contract sent to Server.", contract);
+
+        if(defaultValue === null) {
+        console.log(contract)
+        dispatch({ type:'SEND_CONTRACT', payload: contract });
+        console.log("Contract sent to Server.", contract);
         } else {
-            dispatch({ type: 'UPDATE_CONTRACT', payload: contract });
+            dispatch({ type:'UPDATE_CONTRACT', payload: contract });
+            console.log("Updated contract.", contract)
         }
-        setContract({contract_id: "", location: "", amount: 0, price: 0, month: "", status: ""});
+        setContract({ contract_id: "", location: "", amount: 0, price: 0, month: "", status: "" });
         closeModal();
     }
 
-    return(
+    return (
         <div className="modal-container" onClick={(e) => {
-            if(e.target.className === "modal-container") closeModal()
+            if (e.target.className === "modal-container") closeModal()
         }}>
-            <div className="modal"> 
-            <form onSubmit={handleSubmit}>
+            <div className="modal">
+                <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="contract_id">Contract ID:</label>
                         <input
@@ -40,7 +42,7 @@ function ContractModal({ closeModal, defaultValue }) {
                             onChange={(event) => handleChangeFor('contract_id', event.target.value)}
                         />
                     </div>
-                    {/* <div className="form-group">
+                    <div className="form-group">
                         <label htmlFor="location">Location:</label>
                         <input
                             name="location"
@@ -90,12 +92,12 @@ function ContractModal({ closeModal, defaultValue }) {
                             <option value="Open">Open</option>
                             <option value="Complete">Complete</option>
                         </select>
-                    </div> */}
+                    </div>
                     <button type='submit' className="btn">Submit</button>
 
                 </form>
             </div>
-           
+
         </div>
     );
 };

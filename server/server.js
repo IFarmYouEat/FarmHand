@@ -32,7 +32,7 @@ app.use('/api/contract', contractRouter);
 app.use(express.static('build'));
 
 // App Set //
-const PORT = process.env.PORT || 8330;
+const PORT = process.env.PORT || 5007;
 
 /** Listen * */
 app.listen(PORT, () => {

@@ -6,7 +6,6 @@ function ContractTable({editRow}) {
 
     const dispatch = useDispatch();
     const contracts = useSelector(store => store.contract);
-    console.log(contracts);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_CONTRACTS' });

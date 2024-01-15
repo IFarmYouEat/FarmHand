@@ -4,7 +4,7 @@ import axios from 'axios';
 function* contractSaga(action) {
     yield takeLatest('FETCH_CONTRACTS', fetchContracts);
     yield takeLatest('REMOVE_CONTRACT', deleteContract);
-    yield takeLatest('SEND_CONTRACT_TO_SERVER', postContract);
+    yield takeLatest('SEND_CONTRACT', postContract);
     yield takeLatest('UPDATE_CONTRACT', updateContract);
 };
 
@@ -44,6 +44,7 @@ function* postContract(action){
 };
 
 function* updateContract(action){
+    console.log("In Update Contract", action.payload);
     try{
         yield axios.put('/api/contract', action.payload);
         yield put({ type: 'FETCH_CONTRACTS'});

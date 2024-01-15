@@ -42,17 +42,16 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.put('/', rejectUnauthenticated, (req, res) => {
+  console.log("Updated logged in Router.")
   const updatedContract = req.body;
-  const queryText = `UPDATE "contracts" SET "contract_id" =$1, "contracted_amt" =$2, 
-  "price" = $3, "location_name" = $4, "crop = $5, "delivery_month" = $6, "delivered_amt" $7, "status" =$8 WHERE id =$9;`;
+  const queryText = `UPDATE "contracts" SET "contract_id" =$1, "amount" =$2, 
+  "price" = $3, "location" = $4, "month" = $5, "status" =$6 WHERE id =$7;`;
   const queryValues = [
     updatedContract.contract_id,
-    updatedContract.contracted_amt,
+    updatedContract.amount,
     updatedContract.price,
-    updatedContract.location_name,
-    updatedContract.crop,
-    updatedContract.deliver_month,
-    updatedContract.delivered_amt,
+    updatedContract.location,
+    updatedContract.month,
     updatedContract.status,
     updatedContract.id,
   ];
