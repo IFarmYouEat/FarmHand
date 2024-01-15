@@ -2,16 +2,20 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './ContractTable.css';
 
-function ContractTable( editRow ) {
+function ContractTable(editRow) {
 
     const dispatch = useDispatch();
     const contracts = useSelector(store => store.contract)
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_CONTRACTS'});
+        dispatch({ type: 'FETCH_CONTRACTS' });
     }, []);
 
-    return(
+    const removeContract = (id) => {
+        dispatch({ type: 'REMOVE_CONTRACT', payload: id });
+    }
+
+    return (
         <div className="table-wrapper">
             <table className="table">
                 <thead>
@@ -28,7 +32,7 @@ function ContractTable( editRow ) {
                 </thead>
                 <tbody>
                     {contracts.map(entry => {
-                        return(
+                        return (
                             <tr key={entry.id}>
                                 <td>{entry.contract_id}</td>
                                 <td>{entry.location_name}</td>
@@ -40,7 +44,7 @@ function ContractTable( editRow ) {
                                 <td>
                                     <span>
                                         {<button className="btn" onClick={() => editRow(entry)}>Edit</button>}
-                                        {<button className="btn" onClick={() => removeContract(entry)}>Delete</button>}
+                                        {<button className="btn" onClick={() => removeContract(entry.id)}>Delete</button>}
                                     </span>
                                 </td>
                             </tr>

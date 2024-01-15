@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import './ContractModal.css';
 
-function ContractModal () {
+function ContractModal ({ closeModal, defaultValue }) {
+
+    const dispatch = useDispatch();
 
     return(
         <div>

@@ -19,8 +19,18 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   })
 });
 
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
   console.log("Contract Route Post Route Called")
+});
+
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+  const queryText = `DELETE FROM "contracts" WHERE id=$1;`;
+  pool.query(queryText, [req.params.id])
+  .then(() => {res.sendStatus(200)})
+  .catch((error) => {
+    console.log('Error in Contract Router, unable to delete contract.', error);
+    res.sendStatus(500);
+  });
 });
 
 module.exports = router;
