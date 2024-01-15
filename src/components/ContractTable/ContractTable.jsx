@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './ContractTable.css';
 
-function ContractTable(editRow) {
+function ContractTable({editRow}) {
 
     const dispatch = useDispatch();
-    const contracts = useSelector(store => store.contract)
+    const contracts = useSelector(store => store.contract);
+    console.log(contracts);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_CONTRACTS' });
@@ -13,7 +14,7 @@ function ContractTable(editRow) {
 
     const removeContract = (id) => {
         dispatch({ type: 'REMOVE_CONTRACT', payload: id });
-    }
+    };
 
     return (
         <div className="table-wrapper">
@@ -22,10 +23,9 @@ function ContractTable(editRow) {
                     <tr>
                         <th>Contract ID</th>
                         <th>Location</th>
-                        <th>Commodity</th>
                         <th>Quantity</th>
-                        <th>Delivery</th>
-                        <th>Fulfilled Amount</th>
+                        <th>Price</th>
+                        <th>Delivery Month</th>
                         <th>Status</th>
                         <th></th>
                     </tr>
@@ -35,11 +35,10 @@ function ContractTable(editRow) {
                         return (
                             <tr key={entry.id}>
                                 <td>{entry.contract_id}</td>
-                                <td>{entry.location_name}</td>
-                                <td>{entry.crop}</td>
-                                <td>{entry.contracted_amt}</td>
-                                <td>{entry.delivery_month}</td>
-                                <td>{entry.delivered_amt}</td>
+                                <td>{entry.location}</td>
+                                <td>{entry.amount}</td>
+                                <td>{entry.price}</td>
+                                <td>{entry.month}</td>
                                 <td>{entry.status}</td>
                                 <td>
                                     <span>

@@ -20,7 +20,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.post('/', rejectUnauthenticated, (req, res) => {
-
   const newYield = req.body;
   const queryText = `INSERT INTO "crops"("user_id", "year", "crop", "yield", "source")
                     VALUES ($1, $2, $3, $4, $5);`;

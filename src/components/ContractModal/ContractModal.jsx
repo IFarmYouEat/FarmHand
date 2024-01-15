@@ -6,7 +6,7 @@ function ContractModal ({ closeModal, defaultValue }) {
 
     const dispatch = useDispatch();
 
-    let [contract, setContract] = useState(defaultValue || {contract_id: "", contracted_amt: 0, price: 0, location_name: "", crop: "", delevery_month: "", status: ""});
+    let [contract, setContract] = useState(defaultValue || {contract_id: "", location: "", amount: 0, price: 0, month: "", status: ""});
 
     const handleChangeFor = (key, value) => {
         setContract({ ...contract, [key]: value })
@@ -15,11 +15,13 @@ function ContractModal ({ closeModal, defaultValue }) {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (defaultValue === null) {
+            console.log(contract)
             dispatch({ type: 'SEND_CONTRACT_TO_SERVER', payload: contract });
+            console.log("Contract sent to Server.", contract);
         } else {
             dispatch({ type: 'UPDATE_CONTRACT', payload: contract });
         }
-        setContract({contract_id: "", contracted_amt: 0, price: 0, location_name: "", crop: "", delevery_month: "", status: ""});
+        setContract({contract_id: "", location: "", amount: 0, price: 0, month: "", status: ""});
         closeModal();
     }
 
@@ -39,19 +41,38 @@ function ContractModal ({ closeModal, defaultValue }) {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="crop">Select Crop:</label>
-                        <select name="crop" onChange={(event) => handleChangeFor('crop', event.target.value)} value={contract.crop}>
+                        <label htmlFor="location">Location:</label>
+                        <input
+                            name="location"
+                            type="text"
+                            value={contract.location}
+                            onChange={(event) => handleChangeFor('location', event.target.value)}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="month">Delivery Month:</label>
+                        <select name="month" onChange={(event) => handleChangeFor('month', event.target.value)} value={contract.month}>
                             <option value="">No Selection</option>
-                            <option value="Corn">Corn</option>
-                            <option value="Soybeans">Soybeans</option>
+                            <option value="January">January</option>
+                            <option value="Feburary">Feburary</option>
+                            <option value="March">March</option>
+                            <option value="April">April</option>
+                            <option value="May">May</option>
+                            <option value="June">June</option>
+                            <option value="July">July</option>
+                            <option value="August">August</option>
+                            <option value="September">September</option>
+                            <option value="October">October</option>
+                            <option value="November">November</option>
+                            <option value="December">December</option>
                         </select>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="contracted_amt">Contracted Amount:</label>
+                        <label htmlFor="amount">Contracted Amount:</label>
                         <input
                             type="number"
-                            value={contract.contracted_amt}
-                            onChange={(event) => handleChangeFor('contracted_amt', event.target.value)}
+                            value={contract.amount}
+                            onChange={(event) => handleChangeFor('amount', event.target.value)}
                         />
                     </div>
                     <div className="form-group">

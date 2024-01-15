@@ -17,7 +17,7 @@ function ContractPage() {
         <div className="ContractPage">
             <h1>Contracts</h1>
         <button className="btn" onClick={() => setModalOpen(true)} >Add New Contract</button>
-        {modalOpen && <ContractModal closeModal={() => { setModalOpen(false), setRowToEdit(null)}} defaultValue={rowToEdit} />}
+        {modalOpen && <ContractModal closeModal={() => {setModalOpen(false), setRowToEdit(null)}} defaultValue={rowToEdit} />}
         <ContractTable editRow={handleEditRow} />
         
         </div>
