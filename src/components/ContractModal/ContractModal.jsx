@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import './ContractModal.css';
 
-function ContractModal ({ closeModal, defaultValue }) {
+function ContractModal({ closeModal, defaultValue }) {
 
     const dispatch = useDispatch();
 
@@ -40,7 +40,7 @@ function ContractModal ({ closeModal, defaultValue }) {
                             onChange={(event) => handleChangeFor('contract_id', event.target.value)}
                         />
                     </div>
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <label htmlFor="location">Location:</label>
                         <input
                             name="location"
@@ -90,7 +90,7 @@ function ContractModal ({ closeModal, defaultValue }) {
                             <option value="Open">Open</option>
                             <option value="Complete">Complete</option>
                         </select>
-                    </div>
+                    </div> */}
                     <button type='submit' className="btn">Submit</button>
 
                 </form>

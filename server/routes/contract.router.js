@@ -20,11 +20,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.post('/', rejectUnauthenticated, (req, res) => {
-  console.log("In Contract Router Post Route")
   const newContract = req.body;
   const queryText = `INSERT INTO "contracts" ("user_id", "contract_id", "amount", 
-                    "price", "location", "month", "amount", "status")
-                     VALUES($1, $2, $3, $4, $5, $6, $7, $8);`;
+                    "price", "location", "month", "status")
+                     VALUES($1, $2, $3, $4, $5, $6, $7);`;
   const queryValues = [
     req.user.id,
     newContract.contract_id,
@@ -32,7 +31,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     newContract.price,
     newContract.location,
     newContract.month,
-    newContract.amount,
     newContract.status,
   ];
   pool.query(queryText, queryValues)
