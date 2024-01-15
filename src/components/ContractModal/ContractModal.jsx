@@ -28,7 +28,51 @@ function ContractModal ({ closeModal, defaultValue }) {
             if(e.target.className === "modal-container") closeModal()
         }}>
             <div className="modal"> 
-                <p>Contract Modal</p>
+            <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label htmlFor="contract_id">Contract ID:</label>
+                        <input
+                            name="contract_id"
+                            type="text"
+                            value={contract.contract_id}
+                            onChange={(event) => handleChangeFor('contract_id', event.target.value)}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="crop">Select Crop:</label>
+                        <select name="crop" onChange={(event) => handleChangeFor('crop', event.target.value)} value={contract.crop}>
+                            <option value="">No Selection</option>
+                            <option value="Corn">Corn</option>
+                            <option value="Soybeans">Soybeans</option>
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="contracted_amt">Contracted Amount:</label>
+                        <input
+                            type="number"
+                            value={contract.contracted_amt}
+                            onChange={(event) => handleChangeFor('contracted_amt', event.target.value)}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="price">Price:</label>
+                        <input
+                            type="number"
+                            value={contract.price}
+                            onChange={(event) => handleChangeFor('price', event.target.value)}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="status">Source:</label>
+                        <select name="status" onChange={(event) => handleChangeFor('status', event.target.value)} value={contract.status}>
+                            <option value="">No Selection</option>
+                            <option value="Open">Open</option>
+                            <option value="Complete">Complete</option>
+                        </select>
+                    </div>
+                    <button type='submit' className="btn">Submit</button>
+
+                </form>
             </div>
            
         </div>
