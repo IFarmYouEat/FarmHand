@@ -25,6 +25,7 @@ function ContractTable({editRow}) {
                         <th>Quantity</th>
                         <th>Price</th>
                         <th>Delivery Month</th>
+                        <th>Crop</th>
                         <th>Status</th>
                         <th></th>
                     </tr>
@@ -38,6 +39,7 @@ function ContractTable({editRow}) {
                                 <td>{entry.amount}</td>
                                 <td>{entry.price}</td>
                                 <td>{entry.month}</td>
+                                <td>{entry.year} {entry.crop}</td>
                                 <td>{entry.status}</td>
                                 <td>
                                     <span>

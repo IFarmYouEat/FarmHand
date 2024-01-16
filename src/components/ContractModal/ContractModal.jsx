@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './ContractModal.css';
 
 function ContractModal({ closeModal, defaultValue }) {
 
     const dispatch = useDispatch();
 
-    let [contract, setContract] = useState(defaultValue || {contract_id: "", location: "", amount: 0, price: 0, month: "", status: "" });
+    let [contract, setContract] = useState(defaultValue || {contract_id: "", location: "", amount: 0, price: 0, month: "", status: "", crop_id: ""});
+    const yields = useSelector(store => store.crop);
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_YIELDS'});
+    }, []);
 
     const handleChangeFor = (key, value) => {
         setContract({ ...contract, [key]: value })
@@ -23,7 +28,7 @@ function ContractModal({ closeModal, defaultValue }) {
             dispatch({ type:'UPDATE_CONTRACT', payload: contract });
             console.log("Updated contract.", contract)
         }
-        setContract({ contract_id: "", location: "", amount: 0, price: 0, month: "", status: "" });
+        setContract({ contract_id: "", location: "", amount: 0, price: 0, month: "", status: "", crop_id: "" });
         closeModal();
     }
 
@@ -84,6 +89,17 @@ function ContractModal({ closeModal, defaultValue }) {
                             value={contract.price}
                             onChange={(event) => handleChangeFor('price', event.target.value)}
                         />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="crop_id">Crop:</label>
+                        <select name="crop_id" onChange={(event) => handleChangeFor('crop_id', event.target.value)} value={contract.crop}>
+                            <option value="">No Selection</option>
+                           {yields.map(entry => {
+                            return(
+                                <option value={entry.id}>{entry.year} {entry.crop}</option>
+                            )
+                           })}
+                        </select>
                     </div>
                     <div className="form-group">
                         <label htmlFor="status">Source:</label>
