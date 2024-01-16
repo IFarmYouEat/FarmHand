@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import NumberFormat from '../NumberFormatting/NumberFormat';
 import './CropTable.css'
 
 function CropTable({ editRow }) {
@@ -34,7 +35,7 @@ function CropTable({ editRow }) {
               <tr key={entry.id}>
                 <td>{entry.year}</td>
                 <td>{entry.crop}</td>
-                <td>{entry.yield}</td>
+                <td><NumberFormat number = {entry.yield} /></td>
                 <td>{entry.source}</td>
                 <td>
                   <span className="actions">

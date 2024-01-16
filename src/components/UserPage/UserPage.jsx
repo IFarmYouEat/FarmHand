@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
+import PriceFormat from '../NumberFormatting/PriceFormat';
+import NumberFormat from '../NumberFormatting/NumberFormat';
 import './UserPage.css'
 
 function UserPage() {
@@ -37,13 +39,13 @@ function UserPage() {
           <tbody>
             {summary.map(entry => {
               return(
-              <tr key= {entry.id}>
+              <tr key= {`${entry.year}+${entry.crop}`}>
                 <td>{entry.year}</td>
                 <td>{entry.crop}</td>
-                <td>{entry.crop_yield}</td>
-                <td>{entry.contracted}</td>
-                <td>{entry.available}</td>
-                <td>{entry.avg}</td>
+                <td><NumberFormat number = {entry.crop_yield} /></td>
+                <td><NumberFormat number = {entry.contracted} /></td>
+                <td><NumberFormat number = {entry.available} /></td>
+                <td><PriceFormat price={entry.avg} /></td>
               </tr>
               )
             })

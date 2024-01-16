@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import PriceFormat from '../NumberFormatting/PriceFormat';
+import NumberFormat from '../NumberFormatting/NumberFormat';
 import './ContractTable.css';
 
 function ContractTable({editRow}) {
@@ -36,8 +38,8 @@ function ContractTable({editRow}) {
                             <tr key={entry.id}>
                                 <td>{entry.contract_id}</td>
                                 <td>{entry.location}</td>
-                                <td>{entry.amount}</td>
-                                <td>{entry.price}</td>
+                                <td><NumberFormat number = {entry.amount} /></td>
+                                <td><PriceFormat price = {entry.price} /></td>
                                 <td>{entry.month}</td>
                                 <td>{entry.year} {entry.crop}</td>
                                 <td>{entry.status}</td>
