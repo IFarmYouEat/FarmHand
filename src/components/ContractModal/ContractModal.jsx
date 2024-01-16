@@ -92,7 +92,7 @@ function ContractModal({ closeModal, defaultValue }) {
                     </div>
                     <div className="form-group">
                         <label htmlFor="crop_id">Crop:</label>
-                        <select name="crop_id" onChange={(event) => handleChangeFor('crop_id', event.target.value)} value={contract.crop}>
+                        <select name="crop_id" onChange={(event) => handleChangeFor('crop_id', event.target.value)} value={contract.crop_id}>
                             <option value="">No Selection</option>
                            {yields.map(entry => {
                             return(
