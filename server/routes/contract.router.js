@@ -8,8 +8,10 @@ const {
 
 router.get('/', rejectUnauthenticated, (req, res) => {
 
-  const query = `SELECT * FROM "contracts" JOIN "crops" ON "crop_id" = "crops".id
-  WHERE "contracts"."user_id" = $1 ORDER BY "status" DESC;`;
+  const query = `SELECT "contracts".*, crops.year, crops.crop, crops.id AS "crop_id"
+                FROM "contracts" 
+                JOIN "crops" ON "crop_id" = "crops".id
+                WHERE "contracts"."user_id" = $1 ORDER BY "status" DESC;`;
   pool.query(query, [req.user.id])
   .then(result => {
     res.send(result.rows);
@@ -46,10 +48,9 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 router.put('/', rejectUnauthenticated, (req, res) => {
   console.log("Updated logged in Router.")
   const updatedContract = req.body;
-  const queryText = `UPDATE "contracts" SET "contract_id" =$1, "amount" =$2, 
-  "price" = $3, "location" = $4, "month" = $5, "status" =$6, "crop_id" =$7 WHERE id =$8;`;
+  const queryText = `UPDATE "contracts" SET "amount" =$1, 
+  "price" = $2, "location" = $3, "month" = $4, "status" =$5, "crop_id" =$6 WHERE id =$7;`;
   const queryValues = [
-    updatedContract.contract_id,
     updatedContract.amount,
     updatedContract.price,
     updatedContract.location,
