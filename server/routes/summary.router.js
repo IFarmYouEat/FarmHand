@@ -20,7 +20,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     WHERE contracts.user_id = $1
     GROUP BY crops.year, crops.crop
     ;`;
-  pool.query(query, [req.params.id])
+  pool.query(query, [req.user.id])
     .then(result => {
       res.send(result.rows);
     })
