@@ -22,20 +22,33 @@ function UserPage() {
         <p>Your ID is: {user.id}</p>
         <LogOutButton className="btn" />
       </div>
-      <div>
-        <h1>2024</h1>
-        <table>
+      <div className="table-wrapper">
+        <table className="table">
           <thead>
             <tr>
-              <td></td>
+              <td>Year</td>
+              <td>Crop</td>
               <td>Total Yield</td>
-              <td>Open Contracts</td>
-              <td>Delivered</td>
+              <td>Contracted</td>
               <td>Available</td>
               <td>Average Price</td>
             </tr>
           </thead>
           <tbody>
+            {summary.map(entry => {
+              return(
+              <tr key= {entry.id}>
+                <td>{entry.year}</td>
+                <td>{entry.crop}</td>
+                <td>{entry.crop_yield}</td>
+                <td>{entry.contracted}</td>
+                <td>{entry.available}</td>
+                <td>{entry.avg}</td>
+              </tr>
+              )
+            })
+
+            }
             
           </tbody>
 
