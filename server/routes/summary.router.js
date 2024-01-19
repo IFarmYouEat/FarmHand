@@ -8,19 +8,15 @@ const {
 
 router.get('/', rejectUnauthenticated, (req, res) => {
   const query = `
-    SELECT 
-      crops.year, 
-      crops.crop, 
-      AVG(contracts.price), 
-      SUM(crops.yield) AS crop_yield, 
-      SUM(contracts.amount) AS contracted, 
-      SUM(crops.yield) - SUM(contracts.amount) AS available 
-    FROM contracts
-    JOIN crops ON crops.id = crop_id
-    WHERE contracts.user_id = $1
-    GROUP BY crops.year, crops.crop
-    ORDER BY crops.year DESC
-    ;`;
+  SELECT crops.id, year, crop, yield, 
+	COALESCE(AVG(contracts.price), 0) AS average_price, 
+  	COALESCE(SUM(contracts.amount), 0) AS contracted,
+  	yield - COALESCE(SUM(contracts.amount), 0) AS available 
+  FROM crops
+  LEFT JOIN contracts ON contracts.crop_id = crops.id 
+  WHERE crops.user_id = $1
+  GROUP BY crops.id, year, crop
+  ORDER BY year DESC, Crop ASC;`;
   pool.query(query, [req.user.id])
     .then(result => {
       res.send(result.rows);

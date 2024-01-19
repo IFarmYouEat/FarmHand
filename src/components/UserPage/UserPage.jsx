@@ -19,10 +19,13 @@ function UserPage() {
 
   return (
     <div className="UserPage">
-      <div>
+      {/* <div>
         <h2>Welcome, {user.username}!</h2>
         <p>Your ID is: {user.id}</p>
         <LogOutButton className="btn" />
+      </div> */}
+      <div>
+        <h1>Home Page</h1>
       </div>
       <div className="table-wrapper">
         <table className="table">
@@ -42,10 +45,10 @@ function UserPage() {
               <tr key= {`${entry.year}+${entry.crop}`}>
                 <td>{entry.year}</td>
                 <td>{entry.crop}</td>
-                <td><NumberFormat number = {entry.crop_yield} /></td>
+                <td><NumberFormat number = {entry.yield} /></td>
                 <td><NumberFormat number = {entry.contracted} /></td>
                 <td><NumberFormat number = {entry.available} /></td>
-                <td><PriceFormat price={entry.avg} /></td>
+                <td><PriceFormat price={entry.average_price} /></td>
               </tr>
               )
             })
