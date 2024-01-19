@@ -11,7 +11,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   const query = `SELECT "contracts".*, crops.year, crops.crop, crops.id AS "crop_id"
                 FROM "contracts" 
                 JOIN "crops" ON "crop_id" = "crops".id
-                WHERE "contracts"."user_id" = $1 ORDER BY "status" DESC;`;
+                WHERE "contracts"."user_id" = $1 ORDER BY "status" DESC, crops.year DESC, contracts.month ASC;`;
   pool.query(query, [req.user.id])
   .then(result => {
     res.send(result.rows);
