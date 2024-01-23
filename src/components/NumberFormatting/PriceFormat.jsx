@@ -8,5 +8,4 @@ const formattedPrice = new Intl.NumberFormat('en-US', {
     return formattedPrice;
 }
 
-
 export default PriceFormat;
