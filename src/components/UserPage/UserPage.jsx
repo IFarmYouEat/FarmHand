@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import PriceFormat from '../NumberFormatting/PriceFormat';
 import NumberFormat from '../NumberFormatting/NumberFormat';
+import SortByYear from '../SortByYear/SortByYear';
 import './UserPage.css'
 
 function UserPage() {
   
-  const user = useSelector((store) => store.user);
+  
   const dispatch = useDispatch();
   const summary = useSelector(store => store.summary);
 
@@ -15,19 +16,15 @@ function UserPage() {
     dispatch({ type: 'FETCH_SUMMARY' })
   }, []);
 
-  console.log(summary);
+ 
 
   return (
     <div className="UserPage">
-      {/* <div>
-        <h2>Welcome, {user.username}!</h2>
-        <p>Your ID is: {user.id}</p>
-        <LogOutButton className="btn" />
-      </div> */}
       <div>
         <h1>Home Page</h1>
+        <SortByYear data = {summary} />
       </div>
-      <div className="table-wrapper">
+      {/* <div className="table-wrapper">
         <table className="table">
           <thead>
             <tr>
@@ -57,8 +54,8 @@ function UserPage() {
             
           </tbody>
 
-        </table>
-      </div>
+        </table> */}
+      {/* </div> */}
 
     </div>
   );

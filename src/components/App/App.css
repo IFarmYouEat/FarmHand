@@ -127,7 +127,8 @@ Table
 
 
 .table-wrapper {
-  width: 100%;
+  width: 100vw;
+  margin-top: 5em;
 }
 
 .table {
