@@ -3,24 +3,26 @@ This version uses React, Redux, Express, Passport, and PostgreSQL (a full list o
 
 ## Description
 
-The Prime Solo Project is a React-based application focused on providing robust solutions for contract and crop management. It features a user-friendly interface for seamlessly managing and visualizing contracts and agricultural data, making it an indispensable tool for professionals in the agriculture sector.
+The Prime Solo Project is a React-based application focused on organize and tracking total grain produced and contracts for the amount of grain sold while delivering a weighted average price. This allows farmers to have a better picture of their financial position relative to their break even number. This App aims to provide a tool for farmers who are utilizing pen and notepad for tracking this information, or have no system at all. 
+
+It features a user-friendly interface for seamlessly managing and visualizing contracts and agricultural data, making it an indispensable tool for professionals in the agriculture sector.
 
 ## Key Components
-### Contract Management
 
-    Contract Modal: Facilitates the creation and editing of contract details through a modal dialog, providing inputs for contract specifics and submission functionality.
+### Crop Production Management
+
+    Crop Page: Serves as the hub for crop data management, integrating the CropModal for editing purposes and showcasing crop information in an organized manner.
+
+    Crop Modal: Manages crop-related information, offering fields for 
+
+### Contract Management
 
     Contract Page: A dedicated page for contract management, featuring functionality to open the ContractModal for adding or editing contracts and displaying a list of contracts.
 
     Contract Table: Displays a comprehensive table of contracts, allowing users to view all contract details at a glance. Includes functionality for editing and removing contracts directly from the table.
 
-### Crop Management
+    Contract Modal: Facilitates the creation and editing of contract details through a modal dialog, providing inputs for contract specifics and submission functionality.
 
-    Crop Modal: Manages crop-related information, offering fields for inputting details about crops, such as names and quantities. Designed for easy management and updating of crop data.
-
-    Crop Form: Allows for the addition of new crop yields, providing inputs for year, crop type, and yield amount. A tool for accurately tracking and updating crop production data.
-
-    Crop Page: Serves as the hub for crop data management, integrating the CropModal for editing purposes and showcasing crop information in an organized manner.
 
 ## Styling
 
