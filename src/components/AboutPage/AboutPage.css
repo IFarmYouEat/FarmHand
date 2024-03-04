@@ -2,3 +2,22 @@
     text-align:center;
 }
 
+.technologies-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px
+}
+
+.tech{
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background-color: #f4f4f4;
+    display: flex;
+    flex: 0 0 25%;
+    justify-content: space-evenly;
+    align-items: center;
+}
